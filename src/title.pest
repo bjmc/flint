@@ -1,23 +1,17 @@
 //WHITESPACE = _{ " " | "\t" }
 file = { SOI ~ title_page ~ EOI}
+title_page = { (pair ~ NEWLINE| multiline_pair ~ NEWLINE)+ ~ NEWLINE*}
 
-char = { (ASCII_ALPHA | " " | "-" | "(" | ")") }
+char = { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")") }
 key = @{ char+ }
 value = @{ char+ }
 pair = {key ~ ":" ~ value}
-multiline_pair = {key ~ ":" ~ NEWLINE ~ new_block}
-title_page = { (pair ~ NEWLINE| multiline_pair ~ NEWLINE)+ ~ NEWLINE*}
+multiline_pair = {key ~ ":" ~ NEWLINE ~ block_value}
 
-new_block = _{
-    // The first line in the block
-    PEEK_ALL ~ PUSH("  "+ | "\t"+) ~ block_content ~
-    // Subsequent lines in the block
-    (PEEK_ALL ~ block_content)* ~
-    // Remove the last layer of indentation from the stack when exiting the block
-    DROP
-}
-
-block_content = {
-    value ~ NEWLINE ~ new_block*
+indentation = _{ (" " | "\t")+ }
+block_value = {
+	PUSH(indentation) ~ value ~ NEWLINE ~
+	(PEEK ~ value)* ~
+	DROP
 }
 
