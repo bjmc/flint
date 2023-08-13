@@ -1,13 +1,12 @@
 //WHITESPACE = _{ " " | "\t" }
-char = { (ASCII_ALPHA | " ") }
+file = { SOI ~ title_page ~ EOI}
+
+char = { (ASCII_ALPHA | " " | "-" | "(" | ")") }
 key = @{ char+ }
 value = @{ char+ }
 pair = {key ~ ":" ~ value}
-title_page = { (pair ~ NEWLINE) ~ NEWLINE*}
-file = { SOI ~ title_page ~ EOI}
-
-
 multiline_pair = {key ~ ":" ~ NEWLINE ~ new_block}
+title_page = { (pair ~ NEWLINE| multiline_pair ~ NEWLINE)+ ~ NEWLINE*}
 
 new_block = _{
     // The first line in the block
