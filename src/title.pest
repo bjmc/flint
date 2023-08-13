@@ -1,17 +1,14 @@
-//WHITESPACE = _{ " " | "\t" }
-file = { SOI ~ title_page ~ EOI}
-title_page = { (pair ~ NEWLINE| multiline_pair ~ NEWLINE)+ ~ NEWLINE*}
+// WHITESPACE = _{ " " | "\t" }
+file       = { SOI ~ title_page ~ EOI }
+title_page = { (multiline_pair | pair ~ NEWLINE)+ ~ NEWLINE* }
 
-char = { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")") }
-key = @{ char+ }
-value = @{ char+ }
-pair = {key ~ ":" ~ value}
-multiline_pair = {key ~ ":" ~ NEWLINE ~ block_value}
+char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")") }
+key            = @{ char+ }
+value          = @{ char+ }
+pair           =  { key ~ ":" ~ value }
+multiline_pair =  { key ~ ":" ~ NEWLINE ~ block_value }
 
 indentation = _{ (" " | "\t")+ }
-block_value = {
-	PUSH(indentation) ~ value ~ NEWLINE ~
-	(PEEK ~ value)* ~
-	DROP
+block_value =  {
+    PUSH(indentation) ~ value ~ NEWLINE ~ (PEEK ~ value ~ NEWLINE)* ~ DROP
 }
-
