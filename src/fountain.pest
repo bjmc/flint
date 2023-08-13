@@ -1,11 +1,11 @@
 //! A parser for Fountain files.
 //! https://fountain.io/syntax
-file         = { SOI ~ title_page? ~ body_content ~ EOI }
+file         = { SOI ~ title_page? ~ body_content* ~ EOI }
 title_page   = { (multiline_pair | pair ~ NEWLINE)+ ~ NEWLINE* }
-body_content = { (page_break | transition | scene_heading | action | character | dialogue | parenthetical)* }
+body_content = { (page_break | transition | scene_header | dialogue | parenthetical | action) }
 
 // Title page
-char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")") }
+char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")" | "," | ".") }
 key            = @{ char+ }
 value          = @{ char+ }
 pair           =  { key ~ ":" ~ value }
@@ -16,11 +16,15 @@ block_value    =  {
 }
 // END title page
 
-not_whitespace = {
+/*
+    not_whitespace = {
     !(WHITESPACE) ~ ANY
-}
+    }
+*/
 
 // WHITESPACE = _{ " " | "\t" }
+
+text = { ASCII_ALPHANUMERIC | PUNCTUATION }
 
 dual_marker = { "^" }
 
@@ -34,10 +38,11 @@ scene_number      = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
 escape            = { "!" }
 scene_header_flag = { ("." | ^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") }
 
-scene_header = { NEWLINE ~ scene_header_flag ~ (!"#" ~ value) ~ scene_number }
-character    = { NEWLINE ~ indentation? ~ (("@" ~ value) | ASCII_ALPHA_UPPER) ~ parenthetical? }
-action       = { NEWLINE ~ value }
+scene_header = { NEWLINE ~ scene_header_flag ~ (!"#" ~ text) ~ scene_number }
+character    = { NEWLINE ~ indentation? ~ (("@" ~ text) | ASCII_ALPHA_UPPER) ~ parenthetical? }
+lyrics       = { NEWLINE ~ "~" ~ text }
 transition   = {
     NEWLINE ~ ((">" ~ ANY+) | (ASCII_ALPHA_UPPER ~ "TO:")) ~ NEWLINE
 }
-dialogue     = { character ~ dual_marker? ~ NEWLINE }
+action       = { NEWLINE ~ text }
+dialogue     = { character ~ dual_marker? ~ NEWLINE ~ text }
