@@ -1,0 +1,41 @@
+# https://fountain.io/syntax/
+
+not_whitespace = {
+    !(WHITESPACE)
+    ~ ANY
+}
+
+dual_marker = { "^" }
+
+page_break = { "===" }
+
+indent = {(" "{3, }| "\t"}
+value = { indent | )}
+
+kv_pair = {key ~ ":" ~ value ~ NEWLINE}
+title_page = { (kv_pair)+ ~ NEWLINE}
+
+scene_number = { (ASCII_DIGIT | "." | "-")+ }
+escape = { "!" }
+scene_header_flag = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") }
+scene_number = { "#"}
+
+scene_header = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~  }
+character = { NEWLINE ~ NEWLINE ~ ASCII_ALPHA_UPPER ~ NEWLINE }
+action = { NEWLINE ~
+}
+transition  = { NEWLINE ~
+	(
+		(">" ~ ANY+)|
+		(ASCII_ALPHA_UPPER ~ "TO:")
+	 	 ~ NEWLINE
+}
+dialogue = { character ~ dual_marker? ~ NEWLINE}
+
+
+file = {
+	SOI ~
+	title_page? ~ NEWLINE
+	(page_break | transition | scene_heading | action | character | dialogue | parenthtical)* ~
+	EOI
+}
