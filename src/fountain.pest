@@ -1,41 +1,41 @@
-# https://fountain.io/syntax/
+// https://fountain.io/syntax/
+file         = { SOI ~ title_page? ~ body_content ~ EOI }
+title_page   = { (multiline_pair | pair ~ NEWLINE)+ ~ NEWLINE* }
+body_content = { (page_break | transition | scene_heading | action | character | dialogue | parenthtical)* }
+
+// Title page
+char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")") }
+key            = @{ char+ }
+value          = @{ char+ }
+pair           =  { key ~ ":" ~ value }
+multiline_pair =  { key ~ ":" ~ NEWLINE ~ block_value }
+indentation    = _{ (" " | "\t")+ }
+block_value    =  {
+    PUSH(indentation) ~ value ~ NEWLINE ~ (PEEK ~ value ~ NEWLINE)* ~ DROP
+}
+// END title page
 
 not_whitespace = {
-    !(WHITESPACE)
-    ~ ANY
+    !(WHITESPACE) ~ ANY
 }
+
+// WHITESPACE = _{ " " | "\t" }
 
 dual_marker = { "^" }
 
 page_break = { "===" }
 
-indent = {(" "{3, }| "\t"}
-value = { indent | )}
+indent = { (" "{3, 4} | "\t") }
 
-kv_pair = {key ~ ":" ~ value ~ NEWLINE}
-title_page = { (kv_pair)+ ~ NEWLINE}
-
-scene_number = { (ASCII_DIGIT | "." | "-")+ }
-escape = { "!" }
+scene_number      = { (ASCII_DIGIT | "." | "-")+ }
+escape            = { "!" }
 scene_header_flag = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") }
-scene_number = { "#"}
+scene_number      = { "#" }
 
-scene_header = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~  }
-character = { NEWLINE ~ NEWLINE ~ ASCII_ALPHA_UPPER ~ NEWLINE }
-action = { NEWLINE ~
+scene_header = { scene_header_flag ~ value }
+character    = { NEWLINE ~ NEWLINE ~ ASCII_ALPHA_UPPER ~ NEWLINE }
+action       = { NEWLINE ~ value }
+transition   = {
+    NEWLINE ~ ((">" ~ ANY+) | (ASCII_ALPHA_UPPER ~ "TO:")) ~ NEWLINE
 }
-transition  = { NEWLINE ~
-	(
-		(">" ~ ANY+)|
-		(ASCII_ALPHA_UPPER ~ "TO:")
-	 	 ~ NEWLINE
-}
-dialogue = { character ~ dual_marker? ~ NEWLINE}
-
-
-file = {
-	SOI ~
-	title_page? ~ NEWLINE
-	(page_break | transition | scene_heading | action | character | dialogue | parenthtical)* ~
-	EOI
-}
+dialogue     = { character ~ dual_marker? ~ NEWLINE }
