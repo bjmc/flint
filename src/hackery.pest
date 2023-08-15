@@ -1,5 +1,5 @@
 WHITESPACE = _{ (" " | "\t") }
-file       =  { SOI ~ ((lyrics | forced_action | character | action_text) ~ NEWLINE*)+ ~ EOI }
+file       =  { SOI ~ ((lyrics | forced_action | dialogue | action_text) ~ NEWLINE*)+ ~ EOI }
 line       =  { control_character? ~ indent* ~ text }
 indent     = _{ (" " | "\t") }
 
@@ -7,10 +7,16 @@ lyrics = { "~" ~ text }
 // Compound atomic because we want the indentation
 forced_action = ${ "!" ~ action_text }
 
-control_character =  { "." | "~" | "[" | ">" | "!" }
+control_character =  { "." | "~" | "[" | ">" | "!" | "(" | ")" }
+closers           =  { ")" | "]" }
 head              =  { !(NEWLINE | WHITESPACE | control_character) ~ ANY }
-tail              =  { !(NEWLINE) ~ ANY }
+tail              =  { !(NEWLINE | closers) ~ ANY }
 text              = @{ head ~ tail* }
 action_text       = @{ tail+ }
 blank_line        = @{ NEWLINE }
-character         =  { indent* ~ (ASCII_ALPHA_UPPER | "(" |")" | ".")+ ~ NEWLINE }
+// character         =  { indent* ~ (ASCII_ALPHA_UPPER | "(" |")" | ".")+ ~ NEWLINE }
+dual_marker = { "^" }
+dialogue    = { character ~ NEWLINE ~ indent? ~ text }
+character   = { indent* ~ (("@" ~ text) | ASCII_ALPHA_UPPER+) ~ parenthetical* ~ dual_marker? }
+
+parenthetical = ${ "(" ~ text+ ~ ")" }
