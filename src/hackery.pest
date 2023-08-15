@@ -1,9 +1,10 @@
 WHITESPACE = _{ (" " | "\t") }
-file       =  { SOI ~ ((lyrics | forced_action | line) ~ NEWLINE*)+ ~ EOI }
+file       =  { SOI ~ ((lyrics | forced_action | character | action_text) ~ NEWLINE*)+ ~ EOI }
 line       =  { control_character? ~ indent* ~ text }
 indent     = _{ (" " | "\t") }
 
-lyrics        = { "~" ~ text }
+lyrics = { "~" ~ text }
+// Compound atomic because we want the indentation
 forced_action = ${ "!" ~ action_text }
 
 control_character =  { "." | "~" | "[" | ">" | "!" }
@@ -12,3 +13,4 @@ tail              =  { !(NEWLINE) ~ ANY }
 text              = @{ head ~ tail* }
 action_text       = @{ tail+ }
 blank_line        = @{ NEWLINE }
+character         =  { indent* ~ (ASCII_ALPHA_UPPER | "(" |")" | ".")+ ~ NEWLINE }
