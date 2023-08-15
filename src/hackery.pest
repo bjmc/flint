@@ -1,0 +1,14 @@
+WHITESPACE = _{ (" " | "\t") }
+file       =  { SOI ~ ((lyrics | forced_action | line) ~ NEWLINE*)+ ~ EOI }
+line       =  { control_character? ~ indent* ~ text }
+indent     = _{ (" " | "\t") }
+
+lyrics        = { "~" ~ text }
+forced_action = ${ "!" ~ action_text }
+
+control_character =  { "." | "~" | "[" | ">" | "!" }
+head              =  { !(NEWLINE | WHITESPACE | control_character) ~ ANY }
+tail              =  { !(NEWLINE) ~ ANY }
+text              = @{ head ~ tail* }
+action_text       = @{ tail+ }
+blank_line        = @{ NEWLINE }
