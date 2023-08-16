@@ -10,18 +10,19 @@ forced_action = ${ "!" ~ action_text }
 left_control  = { "." | "~" | "[" | ">" | "!" | "(" | "[[" }
 right_control = { ")" | "]]" | "<" }
 
-centered_action =  { ">" ~ text ~ "<" }
-parenthetical   = ${ "(" ~ text ~ ")" }
-page_break      =  { "="{3, } }
+centered_action = { ">" ~ text ~ "<" }
+parenthetical   = { "(" ~ (!")" ~ text)+ ~ ")" }
+page_break      = { "="{3, } }
 
-head        =  { !(NEWLINE | WHITESPACE | left_control) ~ ANY }
-tail        =  { !(NEWLINE) ~ ANY }
-text        = @{ head ~ tail* }
-action_text = @{ tail+ }
-blank_line  = @{ NEWLINE }
-dual_marker =  { "^" }
-dialogue    =  { character ~ NEWLINE ~ indent? ~ text }
-character   =  { indent* ~ (("@" ~ text) | ASCII_ALPHA_UPPER+) ~ parenthetical* ~ dual_marker? }
+head           =  { !(NEWLINE | WHITESPACE | left_control) ~ ANY }
+tail           =  { !(NEWLINE) ~ ANY }
+text           = @{ head ~ tail* }
+action_text    = @{ tail+ }
+blank_line     = @{ NEWLINE }
+dual_marker    =  { "^" }
+dialogue       =  { character ~ NEWLINE ~ indent? ~ text }
+character_name =  { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
+character      =  { indent* ~ character_name ~ parenthetical? ~ dual_marker? }
 
 // Transitions
 transition        =  { (forced_transition | magic_transition | to_transition) }
