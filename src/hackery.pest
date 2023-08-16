@@ -1,22 +1,33 @@
 WHITESPACE = _{ (" " | "\t") }
-file       =  { SOI ~ ((lyrics | forced_action | dialogue | action_text) ~ NEWLINE*)+ ~ EOI }
-line       =  { control_character? ~ indent* ~ text }
+file       =  { SOI ~ ((page_break | lyrics | centered_action | forced_action | transition | dialogue | action_text) ~ NEWLINE*)+ ~ EOI }
+line       =  { left_control? ~ text }
 indent     = _{ (" " | "\t") }
 
 lyrics = { "~" ~ text }
 // Compound atomic because we want the indentation
 forced_action = ${ "!" ~ action_text }
 
-control_character =  { "." | "~" | "[" | ">" | "!" | "(" | ")" }
-closers           =  { ")" | "]" }
-head              =  { !(NEWLINE | WHITESPACE | control_character) ~ ANY }
-tail              =  { !(NEWLINE | closers) ~ ANY }
-text              = @{ head ~ tail* }
-action_text       = @{ tail+ }
-blank_line        = @{ NEWLINE }
-// character         =  { indent* ~ (ASCII_ALPHA_UPPER | "(" |")" | ".")+ ~ NEWLINE }
-dual_marker = { "^" }
-dialogue    = { character ~ NEWLINE ~ indent? ~ text }
-character   = { indent* ~ (("@" ~ text) | ASCII_ALPHA_UPPER+) ~ parenthetical* ~ dual_marker? }
+left_control  = { "." | "~" | "[" | ">" | "!" | "(" | "[[" }
+right_control = { ")" | "]]" | "<" }
 
-parenthetical = ${ "(" ~ text+ ~ ")" }
+centered_action =  { ">" ~ text ~ "<" }
+parenthetical   = ${ "(" ~ text ~ ")" }
+page_break      =  { "="{3, } }
+
+head        =  { !(NEWLINE | WHITESPACE | left_control) ~ ANY }
+tail        =  { !(NEWLINE) ~ ANY }
+text        = @{ head ~ tail* }
+action_text = @{ tail+ }
+blank_line  = @{ NEWLINE }
+dual_marker =  { "^" }
+dialogue    =  { character ~ NEWLINE ~ indent? ~ text }
+character   =  { indent* ~ (("@" ~ text) | ASCII_ALPHA_UPPER+) ~ parenthetical* ~ dual_marker? }
+
+// Transitions
+transition        =  { forced_transition | magic_transition | to_transition }
+forced_transition = @{ ">" ~ transition_txt+ }
+to_transition     = @{ leading+ ~ "TO:" }
+magic_phrases     =  { "CUT TO BLACK" | "FADE OUT" | "FADE IN" | "FADE TO BLACK" }
+magic_transition  = @{ leading* ~ magic_phrases ~ transition_txt* }
+leading           =  { !("TO:" | magic_phrases) ~ transition_txt }
+transition_txt    =  { !(NEWLINE) ~ (ASCII_ALPHA_UPPER | " " | "*" | "_") }
