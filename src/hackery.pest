@@ -11,7 +11,7 @@ left_control  = { "." | "~" | "[" | ">" | "!" | "(" | "[[" }
 right_control = { ")" | "]]" | "<" }
 
 centered_action = { ">" ~ text ~ "<" }
-parenthetical   = { "(" ~ (!")" ~ ANY)+ ~ ")" }
+
 page_break      = { "="{3, } }
 
 head           =  { !(NEWLINE | WHITESPACE | left_control) ~ ANY }
@@ -20,8 +20,11 @@ text           = @{ head ~ tail* }
 action_text    = @{ tail+ }
 blank_line     = @{ NEWLINE }
 dual_marker    =  { "^" }
-dialogue       =  { character ~ NEWLINE ~ indent? ~ text }
+
+// Characters and dialogue
+dialogue       =  { character ~ NEWLINE ~ text }
 character_name =  { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
+parenthetical   = { "(" ~ (!")" ~ ANY)+ ~ ")" }
 character      =  { indent* ~ character_name ~ parenthetical* ~ dual_marker? }
 
 // Transitions
