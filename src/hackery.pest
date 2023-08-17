@@ -1,34 +1,48 @@
-WHITESPACE = _{ (" " | "\t") }
-file       =  { SOI ~ ((transition | page_break | lyrics | centered_action | forced_action | dialogue | action_text) ~ NEWLINE*)+ ~ EOI }
-line       =  { left_control? ~ text }
-indent     = _{ (" " | "\t") }
+file = {
+    SOI ~ ((transition | page_break | lyrics | dialogue | action))+ ~ NEWLINE+ ~ EOI
+}
 
 lyrics = { "~" ~ text }
-// Compound atomic because we want the indentation
-forced_action = ${ "!" ~ action_text }
 
-left_control  = { "." | "~" | "[" | ">" | "!" | "(" | "[[" }
-right_control = { ")" | "]]" | "<" }
+page_break = { NEWLINE ~ "="{3, } ~ &NEWLINE }
 
+// Basics
+whitespace  =  { (" " | "\t") }
+indent      =  { whitespace }
+blank_line  =  { NEWLINE }
+head        =  { !(NEWLINE | whitespace) ~ ANY }
+tail        =  { !(NEWLINE) ~ ANY }
+text        = @{ head ~ tail* }
+action_text = @{ (emphasis | tail+) }
+dual_marker =  { "^" }
+
+// emphasis
+underline    = { "_" ~ (!"_" ~ text) ~ "_" }
+bold_italics = { "***" ~ (!"*" ~ text) ~ "***" }
+bold         = { "**" ~ (!"*" ~ text) ~ "**" }
+italics      = { "*" ~ (!"*" ~ text) ~ "*" }
+emphasis     = { underline | bold_italics | bold | italics }
+
+// Scene headers
+scene_heading = { NEWLINE ~ header_flag ~ whitespace+ ~ (!"#" ~ text) ~ scene_number ~ &NEWLINE }
+scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
+header_flag   = { ("." | ^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") }
+
+// Actions
 centered_action = { ">" ~ text ~ "<" }
-
-page_break      = { "="{3, } }
-
-head           =  { !(NEWLINE | WHITESPACE | left_control) ~ ANY }
-tail           =  { !(NEWLINE) ~ ANY }
-text           = @{ head ~ tail* }
-action_text    = @{ tail+ }
-blank_line     = @{ NEWLINE }
-dual_marker    =  { "^" }
+forced_action   = { "!" ~ action_text }
+fallback_action = { text }
+action          = { NEWLINE ~ (forced_action | centered_action | fallback_action) ~ &NEWLINE }
 
 // Characters and dialogue
-dialogue       =  { character ~ NEWLINE ~ text }
-character_name =  { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
-parenthetical   = { "(" ~ (!")" ~ ANY)+ ~ ")" }
-character      =  { indent* ~ character_name ~ parenthetical* ~ dual_marker? }
+dialogue       = { NEWLINE ~ character ~ NEWLINE ~ text ~ &NEWLINE }
+character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
+parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
+
+character = { indent* ~ character_name ~ " "* ~ (parenthetical | dual_marker)* }
 
 // Transitions
-transition        =  { (forced_transition | magic_transition | to_transition) }
+transition        =  { NEWLINE ~ (forced_transition | magic_transition | to_transition) ~ &NEWLINE }
 forced_transition = @{ ">" ~ transition_txt+ }
 to_transition     = @{ leading+ ~ "TO:" }
 magic_phrases     =  { "CUT TO BLACK" | "FADE TO BLACK" | "FADE OUT" | "FADE IN" }
