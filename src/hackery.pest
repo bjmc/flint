@@ -1,9 +1,8 @@
 file = {
-    SOI ~ ((page_break | scene_heading | lyrics | transition | dialogue | action))+ ~ NEWLINE* ~ EOI
+    SOI ~ ((page_break | scene_heading | lyrics | transition | dialogue | action | blank_line))+ ~ EOI
 }
 
 lyrics = { NEWLINE ~ "~" ~ text ~ &NEWLINE }
-
 page_break = { NEWLINE ~ "="{3, } ~ &NEWLINE }
 
 // Basics
