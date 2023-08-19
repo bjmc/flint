@@ -39,10 +39,9 @@ fallback_action =  { text }
 action          =  { NEWLINE ~ (forced_action | centered_action | fallback_action) ~ &NEWLINE }
 
 // Characters and dialogue
-dialogue       = { NEWLINE ~ character ~ NEWLINE ~ text ~ &NEWLINE }
-character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
+dialogue       = { NEWLINE ~ character ~ (NEWLINE ~ (parenthetical | text))+ ~ &NEWLINE }
+character_name = { (("@" ~ text) | (ASCII_ALPHA_UPPER | " ")+) }
 parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
-
 character = { indent* ~ character_name ~ " "* ~ (parenthetical | dual_marker)* }
 
 // Transitions
