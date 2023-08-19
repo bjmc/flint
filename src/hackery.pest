@@ -2,11 +2,11 @@ file = {
     SOI ~ ((page_break | scene_heading | lyrics | transition | dialogue | action | blank_line))+ ~ EOI
 }
 
-lyrics = { NEWLINE ~ "~" ~ text ~ &NEWLINE }
+lyrics     = { NEWLINE ~ "~" ~ text ~ &NEWLINE }
 page_break = { NEWLINE ~ "="{3, } ~ &NEWLINE }
 
 // Basics
-whitespace =  { (" " | "\t") }
+whitespace = _{ (" " | "\t") }
 indent     =  { whitespace }
 blank_line =  { NEWLINE }
 head       =  { !(NEWLINE | whitespace) ~ ANY }
@@ -26,9 +26,9 @@ emphasis_chars =  { ul | bi | b | i }
 emphasis       =  { underline | bold_italics | bold | italics }
 
 // Scene headers
-scene_heading = { NEWLINE ~ header_flag ~ whitespace+ ~ (!"#" ~ text) ~ scene_number ~ &NEWLINE }
+scene_heading = { NEWLINE ~ header_flag ~ whitespace+ ~ (!"#" ~ text) ~ scene_number? ~ &NEWLINE }
 scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
-header_flag   = { ("." | ^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") }
+header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ "."? }
 
 // Actions
 dual_marker     =  { "^" }
