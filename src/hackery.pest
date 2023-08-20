@@ -32,9 +32,9 @@ scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
 header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ (" " | ".")+ }
 
 // Actions
-dual_marker     =  { "^" }
+
 action_text     = @{ (emphasis | tail+) }
-centered_action =  { ">" ~ text ~ "<" }
+centered_action =  { ">" ~ (!"<" ~ ANY)+ ~ "<" }
 forced_action   =  { "!" ~ action_text }
 fallback_action =  { text }
 action          =  { NEWLINE ~ (forced_action | centered_action | fallback_action) ~ &NEWLINE }
@@ -43,6 +43,7 @@ action          =  { NEWLINE ~ (forced_action | centered_action | fallback_actio
 dialogue       = { NEWLINE ~ character ~ speech ~ &NEWLINE }
 speech         = { (indent* ~ (parenthetical | emphasis | text) ~ NEWLINE?)+ }
 character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
+dual_marker     =  { "^" }
 parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
 character      = { indent* ~ character_name ~ whitespace* ~ (parenthetical | dual_marker)* ~ NEWLINE }
 
