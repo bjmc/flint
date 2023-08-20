@@ -6,7 +6,7 @@ lyrics     = { NEWLINE ~ "~" ~ text ~ &NEWLINE }
 page_break = { NEWLINE ~ "="{3, } ~ &NEWLINE }
 
 // Basics
-whitespace =  { (" " | "\t") }
+whitespace = _{ (" " | "\t") }
 indent     = _{ whitespace }
 blank_line =  { NEWLINE }
 head       =  { !(NEWLINE | whitespace) ~ ANY }
@@ -26,9 +26,10 @@ emphasis_chars =  { ul | bi | b | i }
 emphasis       =  { underline | bold_italics | bold | italics }
 
 // Scene headers
-scene_heading = { NEWLINE ~ header_flag ~ whitespace+ ~ (!"#" ~ text) ~ scene_number? ~ &NEWLINE }
+scene_heading = { NEWLINE ~ (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? ~ &NEWLINE }
+force_scene   = { "." }
 scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
-header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ "."? }
+header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ (" " | ".")+ }
 
 // Actions
 dual_marker     =  { "^" }
