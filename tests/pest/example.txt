@@ -1,23 +1,15 @@
-My Test
+Scene header
 
 =======
 
-fn x() int {
-  return 1;
-}
+EXT. BRICK'S POOL - DAY
 
 =======
 
-(source_file
-  (function_definition
-    (identifier: "x")
-    (parameter_list)
-    (primitive_type: "int")
-    (block
-      (return_statement 
-        (number: "1")
-      )
-    )
+(file
+  (scene_heading
+    (header_flag: "EXT.")
+    (text: " BRICK'S POOL - DAY")
   )
 )
 

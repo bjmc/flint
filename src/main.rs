@@ -2,7 +2,7 @@ use std::env;
 use std::fs;
 use pest::Parser;
 //use pest_derive::Parser;
-use pest_test_gen::pest_tests;
+//use pest_test_gen::pest_tests;
 
 mod example {
     #[derive(pest_derive::Parser)]
@@ -20,7 +20,7 @@ mod example {
 #[pest_tests(
   super::example::OurParser,
   super::example::Rule,
-  "file",
+  "scene_heading",
   //subdir = "foo",
   recursive = true,
   lazy_static = true,
