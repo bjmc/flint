@@ -4,7 +4,7 @@ title_page = { (multiline_pair | pair ~ NEWLINE)+ ~ NEWLINE* }
 
 char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")") }
 key            = @{ char+ }
-value          = @{ char+ }
+value          = @{ !WHITESPACE ~ char+ }
 pair           =  { key ~ ":" ~ value }
 multiline_pair =  { key ~ ":" ~ NEWLINE ~ block_value }
 

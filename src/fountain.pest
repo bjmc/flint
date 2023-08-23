@@ -1,13 +1,14 @@
 //! A parser for Fountain files.
 //! https://fountain.io/syntax
 file         = { SOI ~ title_page? ~ body_content* ~ EOI }
-title_page   = { (multiline_pair | pair ~ NEWLINE)+ ~ NEWLINE* }
-body_content = { (page_break | transition | scene_header | dialogue | parenthetical | action) }
+title_page   = { (multiline_pair | pair ~ NEWLINE)+ ~ NEWLINE}
+body_content = { NEWLINE ~ (page_break | lyrics | transition | scene_header | dialogue | action) }
 
 // Title page
 char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")" | "," | ".") }
 key            = @{ char+ }
 value          = @{ char+ }
+two_blank_lines = @{ NEWLINE ~ NEWLINE }
 pair           =  { key ~ ":" ~ value }
 multiline_pair =  { key ~ ":" ~ NEWLINE ~ block_value }
 indentation    = _{ (" " | "\t")+ }
@@ -15,6 +16,35 @@ block_value    =  {
     PUSH(indentation) ~ value ~ NEWLINE ~ (PEEK ~ value ~ NEWLINE)* ~ DROP
 }
 // END title page
+
+
+// Basics
+whitespace    = _{ (" " | "\t" | NEWLINE) }
+control_characters = { "." | "~" | "[" | ">" }
+head = {!(whitespace|control_characters) ~ ANY}
+tail = { !NEWLINE ~ ANY}
+text = @{head ~ tail*}
+
+//Body content
+scene_header = { scene_header_flag ~ (!"#" ~ text) ~ scene_number }
+scene_number      = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
+scene_header_flag = { ("." | ^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") }
+
+dialogue     = { character ~ dual_marker? ~ NEWLINE ~ indentation? ~ text }
+character    = { indentation? ~ (("@" ~ text) | ASCII_ALPHA_UPPER) ~ parenthetical? }
+parenthetical = { "(" ~ text ~ ")" }
+dual_marker = { "^" }
+
+note = { "[[" ~ text ~ "]]"}
+
+lyrics       = { "~" ~ text }
+transition   = {
+    NEWLINE ~ ((">" ~ text) | (ASCII_ALPHA_UPPER ~ "TO:")) ~ NEWLINE
+}
+action       = { text }
+page_break = { "===" }
+
+// END body content
 
 /*
     not_whitespace = {
@@ -24,25 +54,16 @@ block_value    =  {
 
 // WHITESPACE = _{ " " | "\t" }
 
-text = { ASCII_ALPHANUMERIC | PUNCTUATION }
 
-dual_marker = { "^" }
 
-parenthetical = { "(" ~ value ~ ")" }
 
-page_break = { "===" }
+
+
 
 indent = { (" "{3, 4} | "\t") }
 
-scene_number      = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
-escape            = { "!" }
-scene_header_flag = { ("." | ^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") }
 
-scene_header = { NEWLINE ~ scene_header_flag ~ (!"#" ~ text) ~ scene_number }
-character    = { NEWLINE ~ indentation? ~ (("@" ~ text) | ASCII_ALPHA_UPPER) ~ parenthetical? }
-lyrics       = { NEWLINE ~ "~" ~ text }
-transition   = {
-    NEWLINE ~ ((">" ~ ANY+) | (ASCII_ALPHA_UPPER ~ "TO:")) ~ NEWLINE
-}
-action       = { NEWLINE ~ text }
-dialogue     = { character ~ dual_marker? ~ NEWLINE ~ text }
+escape            = { "!" }
+
+
+
