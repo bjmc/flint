@@ -1,37 +1,39 @@
 use std::env;
 use std::fs;
 use pest::Parser;
-use pest_derive::Parser;
+//use pest_derive::Parser;
+use pest_test_gen::pest_tests;
 
-#[derive(Parser)]
-#[grammar = "hackery.pest"]
-pub struct OurParser;
-
-#[cfg(test)]
-mod tests {
-  use super::*;
-  //use mycrate::parser::{OurParser, Rule};
-  use lazy_static::lazy_static;
-  use pest_test::{Error, PestTester};
-
-  lazy_static! {
-    static ref TESTER: PestTester<Rule, OurParser> =
-      PestTester::from_defaults(Rule::root_rule);
-  }
-
-  // Loads test from `tests/pest/mytest.txt` and evaluates it. Returns an `Err<pest_test::Error>`
-  // if there was an error evaluating the test, or if the expected and actual values do not match.
-  fn test_my_parser() -> Result<(), Error> {
-    (*TESTER).evaluate_strict("mytest")
-  }
+mod example {
+    #[derive(pest_derive::Parser)]
+    #[grammar = "hackery.pest"]
+    pub struct OurParser;
 }
+
+//#[derive(Parser)]
+//#[grammar = "hackery.pest"]
+//pub struct OurParser;
+
+// Generate tests for all test cases in tests/pest/foo/ and all subdirectories. Since
+// `lazy_static = true`, a single `PestTester` is created and used by all tests; otherwise a new
+// `PestTester` would be created for each test.
+#[pest_tests(
+  super::example::OurParser,
+  super::example::Rule,
+  "file",
+  //subdir = "foo",
+  recursive = true,
+  lazy_static = true,
+)]
+#[cfg(test)]
+mod foo_tests {}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     let file_path = &args[1];
     let unparsed_file = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
-    let file = OurParser::parse(Rule::file, &unparsed_file);
+    let file = example::OurParser::parse(example::Rule::file, &unparsed_file);
         //.expect("unsuccessful parse"); // unwrap the parse result
         //.next().unwrap(); // get and unwrap the `file` rule; never fails
     println!("{:?}", file);
