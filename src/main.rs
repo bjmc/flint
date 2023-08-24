@@ -2,7 +2,8 @@ use std::env;
 use std::fs;
 use pest::Parser;
 //use pest_derive::Parser;
-//use pest_test_gen::pest_tests;
+use pest_test_gen::pest_tests;
+
 
 mod example {
     #[derive(pest_derive::Parser)]
