@@ -168,8 +168,6 @@ dependencies = [
 [[package]]
 name = "pest-test"
 version = "0.1.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5f52c56dcb65df91fa48ba2dcb1e0d9cc888e9eadb3dfe66fb9808f638b97de1"
 dependencies = [
  "colored",
  "pest",

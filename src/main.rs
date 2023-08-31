@@ -2,7 +2,7 @@ use std::env;
 use std::fs;
 use pest::Parser;
 //use pest_derive::Parser;
-use pest_test_gen::pest_tests;
+//
 
 
 mod example {
@@ -18,10 +18,11 @@ mod example {
 // Generate tests for all test cases in tests/pest/foo/ and all subdirectories. Since
 // `lazy_static = true`, a single `PestTester` is created and used by all tests; otherwise a new
 // `PestTester` would be created for each test.
+use pest_test_gen::pest_tests;
 #[pest_tests(
   super::example::OurParser,
   super::example::Rule,
-  "scene_heading",
+  "file",
   //subdir = "foo",
   recursive = true,
   lazy_static = true,

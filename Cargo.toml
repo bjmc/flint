@@ -13,3 +13,6 @@ pest_derive = "2.7.2"
 lazy_static = "1.4.0"
 pest-test = "0.1.5"
 pest-test-gen = "0.1.6"
+
+[patch.crates-io]
+pest-test = { path = "../pest-test/pest-test" }

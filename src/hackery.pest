@@ -71,3 +71,4 @@ magic_phrases     =  { "CUT TO BLACK" | "FADE TO BLACK" | "FADE OUT" | "FADE IN"
 magic_transition  = @{ leading* ~ magic_phrases ~ ":"? }
 leading           =  { !("TO:" | magic_phrases) ~ (indent | transition_txt) }
 transition_txt    =  { !(NEWLINE) ~ (ASCII_ALPHA_UPPER | ".") }
+
