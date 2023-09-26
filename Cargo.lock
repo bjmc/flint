@@ -168,6 +168,7 @@ dependencies = [
 [[package]]
 name = "pest-test"
 version = "0.1.5"
+source = "git+https://github.com/jdidion/pest-test.git#d2af1dccc8a39d07d31d49b99297d3a33792c893"
 dependencies = [
  "colored",
  "pest",

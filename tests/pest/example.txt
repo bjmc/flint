@@ -1,17 +1,18 @@
 Brick Fountain
 
 =======
-Title: Brick
 
-A gorgeous day.  The sun is shining.  But BRICK BRADDOCK, retired police detective, is sitting quietly, contemplating -- something.
-
+EXT. BRICK'S PATIO - DAY
 
 =======
 
 (file
+(body_content
   (scene_heading
-    (header_flag: "EXT.")
-    (text: " BRICK'S POOL - DAY")
+    (header_flag: "EXT. ")
+    (text: "BRICK'S PATIO - DAY")
   )
+  (blank_line: "
+")
 )
-
+)
