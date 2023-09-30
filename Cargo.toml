@@ -15,4 +15,5 @@ pest-test = "0.1.5"
 pest-test-gen = "0.1.6"
 
 [patch.crates-io]
-pest-test = { git = "https://github.com/jdidion/pest-test.git" }
+#pest-test = { git = "https://github.com/jdidion/pest-test.git" }
+pest-test = { path = "../pest-test/pest-test" }

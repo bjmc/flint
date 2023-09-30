@@ -23,6 +23,7 @@ use pest_test_gen::pest_tests;
   super::example::OurParser,
   super::example::Rule,
   "file",
+  ext = "test",
   //subdir = "foo",
   recursive = true,
   lazy_static = true,

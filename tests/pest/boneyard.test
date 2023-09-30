@@ -1,0 +1,32 @@
+Boneyard test
+=============
+A line of action.
+
+/* This is an inline Boneyard. */
+
+/*
+This is a
+multi-line
+Boneyard.
+*/
+
+This is an /* internal */ boneyard.
+
+=============
+(file
+  (body_content
+    (action
+      (generic_action
+        (text: "A line of action.")
+      )
+    )
+    (blank_line: "\n")
+    (boneyard
+      (text: "Beer's ready!")
+    )
+    (boneyard
+      (text: "This is a\nmulti-line\nBoneyard.")
+    )
+    (blank_line: "\n")
+  )
+)
