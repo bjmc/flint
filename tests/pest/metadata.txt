@@ -17,14 +17,50 @@ STEEL
 Beer's ready!
 
 =======
-
 (file
-(body_content
-  (scene_heading
-    (header_flag: "EXT. ")
-    (text: "BRICK'S PATIO - DAY")
+  (title_page
+    (multiline_pair
+      (key: "Title")
+      (block_value
+        (value: "_**BRICK & STEEL**_")
+        (value: "_**FULL RETIRED**_")
+      )
+    )
+    (pair
+      (key: "Credit")
+      (value: " Written by")
+    )
+    (pair
+      (key: "Author")
+      (value: " Stu Maschwitz")
+    )
+    (pair
+      (key: "Source")
+      (value: " Story by KTM")
+    )
+    (pair
+      (key: "Draft date")
+      (value: " 1/27/2012")
+    )
+    (multiline_pair
+      (key: "Contact")
+      (block_value
+        (value: "Next Level Productions")
+        (value: "1588 Mission Dr.")
+        (value: "Solvang, CA 93463")
+      )
+    )
   )
-  (blank_line: "
-")
+  (body_content
+    (dialogue
+      (character
+        (character_name: "STEEL")
+      )
+      (speech
+        (text: "Beer's ready!")
+      )
+    )
+    (blank_line: "\n")
+  )
 )
-)
+

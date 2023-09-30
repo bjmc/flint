@@ -6,14 +6,13 @@ title_page   = { (multiline_pair | pair ~ NEWLINE)+ }
 body_content = { ((page_break | scene_heading | lyrics | transition | dialogue | action | blank_line))+ }
 
 // Title page
-char            =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")" | "," | ".") }
-key             = @{ char+ }
-value           = @{ (emphasis | tail+) }
-two_blank_lines = @{ NEWLINE ~ NEWLINE }
-pair            =  { key ~ ":" ~ value }
-multiline_pair  =  { key ~ ":" ~ NEWLINE ~ block_value }
-indentation     = _{ (" " | "\t")+ }
-block_value     =  {
+char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")" | "," | ".") }
+key            = @{ char+ }
+value          = @{ (emphasis | tail+) }
+pair           =  { key ~ ":" ~ value }
+multiline_pair =  { key ~ ":" ~ NEWLINE ~ block_value }
+indentation    = _{ (" " | "\t")+ }
+block_value    =  {
     PUSH(indentation) ~ value ~ NEWLINE ~ (PEEK ~ value ~ NEWLINE)* ~ DROP
 }
 // END title page
@@ -52,16 +51,16 @@ header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E")
 action_text     = @{ (emphasis | tail+) }
 centered_action =  { ">" ~ (!"<" ~ ANY)+ ~ "<" }
 forced_action   =  { "!" ~ action_text }
-fallback_action =  { text }
-action          =  { NEWLINE ~ (forced_action | centered_action | fallback_action) ~ &NEWLINE }
+generic_action  =  { text }
+action          =  { NEWLINE ~ (forced_action | centered_action | generic_action) ~ &NEWLINE }
 
 // Characters and dialogue
-dialogue       = { NEWLINE ~ character ~ speech ~ &NEWLINE }
-speech         = { (indent* ~ (parenthetical | emphasis | text) ~ NEWLINE?)+ }
+dialogue       = { NEWLINE ~ character ~ NEWLINE ~ speech ~ &NEWLINE }
+speech         = { (indent* ~ (parenthetical | text))+ }
 character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
 dual_marker    = { "^" }
 parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
-character      = { indent* ~ character_name ~ whitespace* ~ (parenthetical | dual_marker)* ~ NEWLINE }
+character      = { indent* ~ character_name ~ whitespace* ~ (parenthetical | dual_marker)* ~ &NEWLINE }
 
 // Transitions
 transition        =  { NEWLINE ~ emphasis_chars? ~ (forced_transition | magic_transition | to_transition) ~ emphasis_chars? ~ &NEWLINE }
@@ -71,4 +70,3 @@ magic_phrases     =  { "CUT TO BLACK" | "FADE TO BLACK" | "FADE OUT" | "FADE IN"
 magic_transition  = @{ leading* ~ magic_phrases ~ ":"? }
 leading           =  { !("TO:" | magic_phrases) ~ (indent | transition_txt) }
 transition_txt    =  { !(NEWLINE) ~ (ASCII_ALPHA_UPPER | ".") }
-
