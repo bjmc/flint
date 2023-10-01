@@ -3,7 +3,16 @@ file = {
 }
 
 title_page   = { (multiline_pair | pair ~ NEWLINE)+ }
-body_content = { ((page_break | boneyard | scene_heading | lyrics | transition | dialogue | action | blank_line))+ }
+body_content = { (
+    page_break |
+    boneyard |
+    scene_heading |
+    lyrics |
+    transition |
+    dialogue |
+    action |
+    blank_line
+)+ }
 
 // Title page
 char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")" | "," | ".") }
@@ -47,10 +56,8 @@ scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
 header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ (" " | ".")+ }
 
 // Boneyard
-open_boneyard  = { "/*" }
-close_boneyard = { "*/" }
-boneyard_text  = { (!close_boneyard ~ ANY)+ }
-boneyard       = { open_boneyard ~ boneyard_text ~ close_boneyard }
+boneyard = { "/*" ~ (boneyard | !"*/" ~ ANY)* ~ "*/" }
+COMMENT = _{ boneyard }
 
 // Actions
 
