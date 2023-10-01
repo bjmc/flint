@@ -71,7 +71,7 @@ action          =  { start ~ (forced_action | centered_action | generic_action) 
 // Characters and dialogue
 dialogue       = { start ~ character ~ speech+ }
 speech         = { (NEWLINE ~ indent* ~ (parenthetical | text)) ~ &NEWLINE }
-character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
+character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER ~ (ASCII_ALPHA_UPPER | ASCII_DIGIT)+) }
 dual_marker    = { "^" }
 parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
 character      = { indent* ~ character_name ~ whitespace* ~ (parenthetical | dual_marker)* ~ &NEWLINE }
