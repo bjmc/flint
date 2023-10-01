@@ -1,8 +1,8 @@
 file = {
-    SOI ~ title_page? ~ body_content ~ EOI
+    title_page? ~ body_content ~ EOI
 }
 
-title_page   = { (multiline_pair | pair ~ NEWLINE)+ }
+title_page   = { start ~ (multiline_pair | pair ~ NEWLINE)+ }
 body_content = { (
     page_break |
     boneyard |
@@ -26,12 +26,13 @@ block_value    =  {
 }
 // END title page
 
-lyrics     = { NEWLINE ~ "~" ~ text ~ &NEWLINE }
-page_break = { NEWLINE ~ "="{3, } ~ &NEWLINE }
+lyrics     = { start ~ "~" ~ text ~ &NEWLINE }
+page_break = { start ~ "="{3, } ~ &NEWLINE }
 
 // Basics
 whitespace = _{ (" " | "\t") }
 indent     = _{ whitespace }
+start      =  _{ SOI | NEWLINE }
 blank_line =  { NEWLINE }
 head       =  { !(NEWLINE | whitespace) ~ ANY }
 tail       =  { !(NEWLINE) ~ ANY }
@@ -50,7 +51,7 @@ emphasis_chars =  { ul | bi | b | i }
 emphasis       =  { underline | bold_italics | bold | italics }
 
 // Scene headers
-scene_heading = { NEWLINE ~ (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? ~ &NEWLINE }
+scene_heading = { start ~ (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? ~ &NEWLINE }
 force_scene   = { "." }
 scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
 header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ (" " | ".")+ }
@@ -65,10 +66,10 @@ action_text     = @{ (emphasis | tail+) }
 centered_action =  { ">" ~ (!"<" ~ ANY)+ ~ "<" }
 forced_action   =  { "!" ~ action_text }
 generic_action  =  { text }
-action          =  { NEWLINE ~ (forced_action | centered_action | generic_action) ~ &NEWLINE }
+action          =  { start ~ (forced_action | centered_action | generic_action) ~ &NEWLINE }
 
 // Characters and dialogue
-dialogue       = { NEWLINE ~ character ~ NEWLINE ~ speech ~ &NEWLINE }
+dialogue       = { start ~ character ~ NEWLINE ~ speech ~ &NEWLINE }
 speech         = { (indent* ~ (parenthetical | text))+ }
 character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
 dual_marker    = { "^" }
@@ -76,7 +77,7 @@ parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
 character      = { indent* ~ character_name ~ whitespace* ~ (parenthetical | dual_marker)* ~ &NEWLINE }
 
 // Transitions
-transition        =  { NEWLINE ~ emphasis_chars? ~ (forced_transition | magic_transition | to_transition) ~ emphasis_chars? ~ &NEWLINE }
+transition        =  { start ~ emphasis_chars? ~ (forced_transition | magic_transition | to_transition) ~ emphasis_chars? ~ &NEWLINE }
 forced_transition = @{ ">" ~ transition_txt+ ~ ":"? }
 to_transition     = @{ leading* ~ "TO:" }
 magic_phrases     =  { "CUT TO BLACK" | "FADE TO BLACK" | "FADE OUT" | "FADE IN" }
