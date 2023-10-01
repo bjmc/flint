@@ -1,7 +1,6 @@
 Brick Fountain
 
 =======
-
 EXT. BRICK'S PATIO - DAY
 
 =======
@@ -12,7 +11,6 @@ EXT. BRICK'S PATIO - DAY
     (header_flag: "EXT. ")
     (text: "BRICK'S PATIO - DAY")
   )
-  (blank_line: "
-")
+  (blank_line: "\n")
 )
 )
