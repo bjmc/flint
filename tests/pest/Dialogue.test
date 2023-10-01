@@ -52,4 +52,171 @@ reason.
 	Well, then I'll just indent!
 
 =============
-(file)
+(file
+  (body_content
+    (dialogue
+      (character
+        (character_name: "ADAM")
+      )
+      (speech
+        (text: "I like to write.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "EVE")
+        (parenthetical: "(O.S.)")
+      )
+      (speech
+        (text: "What kind of writing?")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "ADAM")
+      )
+      (speech
+        (parenthetical: "(nervous)")
+      )
+      (speech
+        (text: "Screenwriting.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "EVE")
+      )
+      (speech
+        (text: "ME TOO!")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "EVE")
+        (parenthetical: "(cont\'d)")
+      )
+      (speech
+        (text: "I think screenwriting is the best.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "ADAM")
+      )
+      (speech
+        (text: "That\'s great.")
+      )
+      (speech
+        (text: "I was really worried you wouldn\'t")
+      )
+      (speech
+        (text: "like screenwriting.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "EVE")
+      )
+      (speech
+        (text: "Oh, Adam.")
+      )
+      (speech
+        (parenthetical: "(kissing him)")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "ADAM")
+      )
+      (speech
+        (text: "I love you.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "EVE")
+        (dual_marker: "^")
+      )
+      (speech
+        (text: "You\'re so stupid.")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "R2D2")
+      )
+    )
+    (action
+      (generic_action
+        (text: "Bleep Boop.")
+      )
+    )
+    (action
+      (generic_action
+        (text: "(*This is a valid character cue.*)")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "23 (O.S.)")
+      )
+    )
+    (action
+      (generic_action
+        (text: "Character name must include a letter")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "ADAM")
+      )
+      (speech
+        (text: "That was really weird.")
+      )
+      (speech
+        (text: "I can be weird to. Here\'s")
+      )
+      (speech
+        (text: "a space in the dialogue")
+      )
+      (speech
+        (text: "block")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "for absolutely no good")
+      )
+    )
+    (action
+      (generic_action
+        (text: "reason.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "EVE")
+      )
+      (speech
+        (parenthetical: "(feeling cocky)")
+      )
+      (speech
+        (text: "Well, then I\'ll just indent!")
+      )
+    )
+    (blank_line: "\n")
+  )
+)
