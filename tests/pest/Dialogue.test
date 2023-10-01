@@ -150,19 +150,15 @@ reason.
       )
     )
     (blank_line: "\n")
-    (action
-      (generic_action
-        (text: "R2D2")
+		(dialogue
+      (character
+        (character_name: "R2D2")
       )
-    )
-    (action
-      (generic_action
+      (speech
         (text: "Bleep Boop.")
-      )
-    )
-    (action
-      (generic_action
-        (text: "(*This is a valid character cue.*)")
+			)
+      (speech
+        (parenthetical: "(*This is a valid character cue.*)")
       )
     )
     (blank_line: "\n")
