@@ -11,6 +11,12 @@ multi-line
 Boneyard.
 */
 
+/*
+  multi-line
+  /* nested boneyard */
+  doesn't terminate early
+*/
+
 This is an /* internal */ boneyard.
 
 =============
@@ -23,7 +29,7 @@ This is an /* internal */ boneyard.
     )
     (blank_line: "\n")
     (boneyard
-      (text: "Beer's ready!")
+      (text: " This is an inline Boneyard. ")
     )
     (boneyard
       (text: "This is a\nmulti-line\nBoneyard.")
