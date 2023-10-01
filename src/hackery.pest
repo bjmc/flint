@@ -69,8 +69,8 @@ generic_action  =  { text }
 action          =  { start ~ (forced_action | centered_action | generic_action) ~ &NEWLINE }
 
 // Characters and dialogue
-dialogue       = { start ~ character ~ NEWLINE ~ speech ~ &NEWLINE }
-speech         = { (indent* ~ (parenthetical | text))+ }
+dialogue       = { start ~ character ~ speech+ }
+speech         = { (NEWLINE ~ indent* ~ (parenthetical | text)) ~ &NEWLINE }
 character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER+) }
 dual_marker    = { "^" }
 parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
