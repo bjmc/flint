@@ -40,10 +40,10 @@ Character name must include a letter
 
 ADAM
 That was really weird.
-I can be weird to. Here's
+I can be weird too. Here's
 a space in the dialogue
 block
-
+  
 for absolutely no good
 reason.
 
@@ -181,7 +181,7 @@ reason.
         (text: "That was really weird.")
       )
       (speech
-        (text: "I can be weird to. Here\'s")
+        (text: "I can be weird too. Here\'s")
       )
       (speech
         (text: "a space in the dialogue")
@@ -189,15 +189,11 @@ reason.
       (speech
         (text: "block")
       )
-    )
-    (blank_line: "\n")
-    (action
-      (generic_action
+      (continuation_line: "\n  ")
+      (speech
         (text: "for absolutely no good")
       )
-    )
-    (action
-      (generic_action
+      (speech
         (text: "reason.")
       )
     )
