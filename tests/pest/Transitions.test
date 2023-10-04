@@ -1,0 +1,49 @@
+Transitions Tests
+=================
+CUT TO:
+
+SMASH CUT TO:
+
+FADE TO BLACK.
+
+> NOT A STANDARD TRANSITION:
+
+CUT TO:  
+
+GO TO:
+
+TO:
+
+=================
+(file
+  (body_content
+    (transition
+      (to_transition: "CUT TO:")
+    )
+    (blank_line: "\n")
+    (transition
+      (to_transition: "SMASH CUT TO:")
+    )
+    (blank_line: "\n")
+    (transition
+      (to_transition: "FADE TO BLACK.")
+    )
+    (blank_line: "\n")
+    (transition
+      (forced_transition: "> NOT A STANDARD TRANSITION:")
+    )
+    (blank_line: "\n")
+    (transition
+      (to_transition: "CUT TO:  ")
+    )
+    (blank_line: "\n")
+    (transition
+      (to_transition: "GO TO:")
+    )
+    (blank_line: "\n")
+    (transition
+      (to_transition: "TO:")
+    )
+    (blank_line: "\n")
+  )
+)
