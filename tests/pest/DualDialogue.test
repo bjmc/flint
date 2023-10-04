@@ -1,0 +1,32 @@
+Basic dual dialogue test
+------------------------
+ADAM
+Yes.
+
+EVE ^
+No.
+
+------------------------
+(file
+  (body_content
+    (dialogue
+      (character
+        (character_name: "ADAM")
+      )
+      (speech
+        (text: "Yes.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "EVE")
+        (dual_marker: "^")
+      )
+      (speech
+        (text: "No.")
+      )
+    )
+    (blank_line: "\n")
+  )
+)
