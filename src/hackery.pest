@@ -78,10 +78,11 @@ parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
 character      = { indent* ~ character_name ~ whitespace* ~ (parenthetical | dual_marker)* ~ &NEWLINE }
 
 // Transitions
-transition        =  { start ~ emphasis_chars? ~ (forced_transition | magic_transition | to_transition) ~ emphasis_chars? ~ &NEWLINE }
-forced_transition = @{ ">" ~ transition_txt+ ~ ":"? }
+transition        =  { start ~ emphasis_chars? ~ (forced_transition | magic_transition | to_transition) ~ emphasis_chars? ~ whitespace* ~ &NEWLINE }
+forced_transition = @{ ">" ~ transition_txt+ }
 to_transition     = @{ leading* ~ "TO:" }
+terminal_punctuation = { ("." | ":") }
 magic_phrases     =  { "CUT TO BLACK" | "FADE TO BLACK" | "FADE OUT" | "FADE IN" }
-magic_transition  = @{ leading* ~ magic_phrases ~ ":"? }
+magic_transition  = @{ leading* ~ magic_phrases ~ terminal_punctuation? }
 leading           =  { !("TO:" | magic_phrases) ~ (indent | transition_txt) }
-transition_txt    =  { !(NEWLINE) ~ (ASCII_ALPHA_UPPER | ".") }
+transition_txt    =  { !(NEWLINE) ~ ANY }

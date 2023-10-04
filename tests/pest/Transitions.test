@@ -26,7 +26,7 @@ TO:
     )
     (blank_line: "\n")
     (transition
-      (to_transition: "FADE TO BLACK.")
+      (magic_transition: "FADE TO BLACK.")
     )
     (blank_line: "\n")
     (transition
@@ -34,7 +34,7 @@ TO:
     )
     (blank_line: "\n")
     (transition
-      (to_transition: "CUT TO:  ")
+      (to_transition: "CUT TO:")
     )
     (blank_line: "\n")
     (transition
