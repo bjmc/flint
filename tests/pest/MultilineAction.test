@@ -1,0 +1,49 @@
+Multiline action
+================
+A normal line of action.
+
+This is a multi-line block of Action.
+Made famous by the great
+WALTER HILL
+but used by many other writers.
+
+A normal line of action.
+
+================
+(file
+  (body_content
+    (action
+      (generic_action
+        (text: "A normal line of action.")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "This is a multi-line block of Action.")
+      )
+    )
+    (action
+      (generic_action
+        (text: "Made famous by the great")
+      )
+    )
+    (action
+      (generic_action
+        (text: "WALTER HILL")
+      )
+    )
+    (action
+      (generic_action
+        (text: "but used by many other writers.")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "A normal line of action.")
+      )
+    )
+    (blank_line: "\n")
+  )
+)
