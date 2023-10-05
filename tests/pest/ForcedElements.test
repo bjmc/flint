@@ -1,3 +1,5 @@
+Forced elements test
+--------------------
 !BANG
 BANG
 BANG
@@ -8,3 +10,46 @@ I'm vegan.
 SINGER
 ~These are the songs
 ~That I sing.
+
+--------------------
+(file
+  (body_content
+    (action
+      (forced_action
+        (action_text: "BANG")
+      )
+    )
+    (dialogue
+      (character
+        (character_name: "BANG")
+      )
+      (speech
+        (text: "BANG")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name
+          (text: "McDUCK")
+        )
+      )
+      (speech
+        (text: "I\'m vegan.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "SINGER")
+      )
+      (speech
+        (lyrics: "~These are the songs")
+      )
+      (speech
+        (lyrics: "~That I sing.")
+      )
+    )
+    (blank_line: "\n")
+  )
+)
