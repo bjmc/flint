@@ -11,15 +11,21 @@ Centered actions tests
 ======================
 (file
   (body_content
-    (centered_action: "> Centered <")
+    (centered_action
+      (ctxt: "> Centered <")
+    )
     (blank_line: "\n")
     (transition
       (forced_transition: "> Not centered")
     )
     (blank_line: "\n")
-    (centered_action: ">No space<")
+    (centered_action
+      (ctxt: ">No space<")
+    )
     (blank_line: "\n")
-    (centered_action: ">      Lots of Space\t\t<")
+    (centered_action
+      (ctxt: ">      Lots of Space\t\t<")
+    )
     (blank_line: "\n")
   )
 )
