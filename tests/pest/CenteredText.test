@@ -1,0 +1,25 @@
+Centered actions tests
+======================
+> Centered <
+
+> Not centered
+
+>No space<
+
+>      Lots of Space		<
+
+======================
+(file
+  (body_content
+    (centered_action: "> Centered <")
+    (blank_line: "\n")
+    (transition
+      (forced_transition: "> Not centered")
+    )
+    (blank_line: "\n")
+    (centered_action: ">No space<")
+    (blank_line: "\n")
+    (centered_action: ">      Lots of Space\t\t<")
+    (blank_line: "\n")
+  )
+)

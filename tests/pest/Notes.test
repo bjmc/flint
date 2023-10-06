@@ -1,0 +1,14 @@
+Notes tests
+===========
+A line.
+
+[[A note.]]
+
+[[This note spans
+  multiple lines.]]
+
+This is an [[internal]] note.
+
+===========
+
+(file)

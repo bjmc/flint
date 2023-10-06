@@ -1,0 +1,186 @@
+Simple Script Test
+========================
+Title: A Simple Script
+Author: Nima Yousefi
+Draft date: 2/1/2012
+
+
+FADE IN:
+
+INT. OFFICE - MORNING
+
+A MAN sits alone at his desk.
+
+MAN (V.O.)
+(passionately)
+I'm writing.
+
+====
+
+ext. house - day
+
+Another scene.
+
+> Burn to White.
+
+> THE END <
+
+[[Comment]]
+
+= Synopsis
+
+/*
+This text is in the boneyard.
+*/
+
+# Section 1
+
+This is in section one.
+
+## Section 1-1
+
+This should be at a higher depth than the previous section.
+
+.FORCED SCENE HEADING
+
+... Not a forced scene heading
+
+/* Boneyard 2 */
+
+Scott exasperatedly throws down the card on the table and picks up the phone, hitting speed dial #1...
+
+[[The following should not be considered a transition because it ends with one or more spaces.]]
+
+CUT TO: 
+
+========================
+(file
+  (title_page
+    (pair
+      (key: "Title")
+      (value: " A Simple Script")
+    )
+    (pair
+      (key: "Author")
+      (value: " Nima Yousefi")
+    )
+    (pair
+      (key: "Draft date")
+      (value: " 2/1/2012")
+    )
+  )
+  (body_content
+    (blank_line: "\n")
+    (transition
+      (magic_transition: "FADE IN:")
+    )
+    (blank_line: "\n")
+    (scene_heading
+      (header_flag: "INT. ")
+      (text: "OFFICE - MORNING")
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "A MAN sits alone at his desk.")
+      )
+    )
+    (blank_line: "\n")
+    (dialogue
+      (character
+        (character_name: "MAN")
+        (parenthetical: "(V.O.)")
+      )
+      (speech
+        (parenthetical: "(passionately)")
+      )
+      (speech
+        (text: "I\'m writing.")
+      )
+    )
+    (blank_line: "\n")
+    (page_break: "\n====")
+    (blank_line: "\n")
+    (scene_heading
+      (header_flag: "ext. ")
+      (text: "house - day")
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "Another scene.")
+      )
+    )
+    (blank_line: "\n")
+    (transition
+      (forced_transition: "> Burn to White.")
+    )
+    (blank_line: "\n")
+    (transition
+      (forced_transition: "> THE END <")
+    )
+    (blank_line: "\n")
+    (blank_line: "\n")
+    (COMMENT: "[[Comment]]")
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "= Synopsis")
+      )
+    )
+    (blank_line: "\n")
+    (blank_line: "\n")
+    (COMMENT: "/*\nThis text is in the boneyard.\n*/")
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "# Section 1")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "This is in section one.")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "## Section 1-1")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "This should be at a higher depth than the previous section.")
+      )
+    )
+    (blank_line: "\n")
+    (scene_heading
+      (force_scene: ".")
+      (text: "FORCED SCENE HEADING")
+    )
+    (blank_line: "\n")
+    (scene_heading
+      (force_scene: ".")
+      (text: ".. Not a forced scene heading")
+    )
+    (blank_line: "\n")
+    (blank_line: "\n")
+    (COMMENT: "/* Boneyard 2 */")
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (text: "Scott exasperatedly throws down the card on the table and picks up the phone, hitting speed dial #1...")
+      )
+    )
+    (blank_line: "\n")
+    (blank_line: "\n")
+    (note: "[[The following should not be considered a transition because it ends with one or more spaces.]]")
+    (blank_line: "\n")
+    (transition
+      (to_transition: "CUT TO:")
+    )
+    (blank_line: "\n")
+  )
+)
