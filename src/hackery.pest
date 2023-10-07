@@ -5,6 +5,7 @@ file = {
 title_page   = { start ~ (multiline_pair | pair ~ NEWLINE)+ }
 body_content = { (
     page_break |
+    wrapper |
     note |
     boneyard |
     centered_action |
@@ -27,6 +28,9 @@ block_value    =  {
 }
 // END title page
 page_break = { start ~ "="{3, } ~ &NEWLINE }
+
+wrapper = _{ start ~ section_header ~ &NEWLINE }
+section_header = @{"#"+ ~ whitespace* ~ text }
 
 
 // Basics
