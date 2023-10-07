@@ -5,14 +5,14 @@ file = {
 title_page   = { start ~ (multiline_pair | pair ~ NEWLINE)+ }
 body_content = { (
     page_break |
-    wrapper |
+    section_header_wr |
     note |
     boneyard |
-    centered_action |
-    scene_heading |
-    transition |
+    centered_action_wr |
+    scene_heading_wr |
+    transition_wr |
     dialogue |
-    action |
+    action_wr |
     blank_line
 )+ }
 
@@ -27,20 +27,30 @@ block_value    =  {
     PUSH(indentation) ~ value ~ NEWLINE ~ (PEEK ~ value ~ NEWLINE)* ~ DROP
 }
 // END title page
-page_break = { start ~ "="{3, } ~ &NEWLINE }
-
-wrapper = _{ start ~ section_header ~ &NEWLINE }
-section_header = @{"#"+ ~ whitespace* ~ text }
-
 
 // Basics
-whitespace = _{ (" " | "\t") }
-indent     = _{ whitespace }
+ws = _{ (" " | "\t") }
 start      =  _{ SOI | NEWLINE }
 blank_line =  { NEWLINE }
-head       =  { !(NEWLINE | whitespace) ~ ANY }
+head       =  { !(NEWLINE | ws) ~ ANY }
 tail       =  { !(NEWLINE) ~ ANY }
 text       = @{ (emphasis | head ~ tail*) }
+
+
+// Line-wrappers
+section_header_wr    = _{ start ~ section_header ~ &NEWLINE }
+scene_heading_wr     = _{start ~ scene_heading ~ &NEWLINE}
+centered_action_wr   = _{ start ~ centered_action ~ &NEWLINE }
+action_wr            = _{ start ~ action ~ &NEWLINE }
+transition_wr        = _{ start ~ transition ~ &NEWLINE }
+
+section_header = @{"#"+ ~ ws* ~ text }
+
+
+page_break = { start ~ "="{3, } ~ &NEWLINE }
+
+
+
 
 // emphasis
 ul             =  { "_" }
@@ -55,7 +65,8 @@ emphasis_chars =  { ul | bi | b | i }
 emphasis       =  { underline | bold_italics | bold | italics }
 
 // Scene headers
-scene_heading = { start ~ (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? ~ &NEWLINE }
+
+scene_heading = { (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? }
 force_scene   = { "." }
 scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
 header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ (" " | ".")+ }
@@ -70,28 +81,27 @@ boneyard = { "/*" ~ (boneyard | !"*/" ~ ANY)* ~ "*/" }
 // Actions
 
 action_text     = @{ (emphasis | tail+) }
-ctxt = @{ ">" ~ (!("<" | NEWLINE) ~ ANY)* ~ "<" }
-centered_action = { start ~ ctxt ~ &NEWLINE }
+centered_action = @{ ">" ~ (!("<" | NEWLINE) ~ ANY)* ~ "<" }
 forced_action   =  { "!" ~ action_text }
 generic_action  =  { text }
-action          =  { start ~ (forced_action | generic_action) ~ &NEWLINE }
+action = { (forced_action | generic_action) }
 
 // Characters and dialogue
 dialogue       = { start ~ character ~ (continuation_line | speech)+ }
 lyrics         = @{ "~" ~ text ~ &NEWLINE }
-speech         = { (NEWLINE ~ indent* ~ (parenthetical | lyrics | text)) ~ &NEWLINE }
+speech         = { (NEWLINE ~ ws* ~ (parenthetical | lyrics | text)) ~ &NEWLINE }
 character_name = { (("@" ~ text) | ASCII_ALPHA_UPPER ~ (ASCII_ALPHA_UPPER | ASCII_DIGIT)*) }
 dual_marker    = { "^" }
 continuation_line = { NEWLINE ~ " "{2,}~ &NEWLINE}
 parenthetical  = { "(" ~ (!")" ~ ANY)+ ~ ")" }
-character      = { indent* ~ character_name ~ whitespace* ~ (parenthetical | dual_marker)* ~ &NEWLINE }
+character      = { ws* ~ character_name ~ ws* ~ (parenthetical | dual_marker)* ~ &NEWLINE }
 
 // Transitions
-transition        =  { start ~ emphasis_chars? ~ (forced_transition | magic_transition | to_transition) ~ emphasis_chars? ~ whitespace* ~ &NEWLINE }
+transition        =  { emphasis_chars? ~ (forced_transition | magic_transition | to_transition) ~ emphasis_chars? ~ ws* }
 forced_transition = @{ ">" ~ transition_txt+ }
 to_transition     = @{ leading* ~ "TO:" }
 terminal_punctuation = { ("." | ":") }
 magic_phrases     =  { "CUT TO BLACK" | "FADE TO BLACK" | "FADE OUT" | "FADE IN" }
 magic_transition  = @{ leading* ~ magic_phrases ~ terminal_punctuation? }
-leading           =  { !("TO:" | magic_phrases) ~ (indent | transition_txt) }
+leading           =  { !("TO:" | magic_phrases) ~ (ws | transition_txt) }
 transition_txt    =  { !(NEWLINE) ~ ANY }
