@@ -38,7 +38,7 @@ start      = _{ SOI | NEWLINE }
 bn_open    =  { ("[[" | "/*") }
 blank_line =  { NEWLINE }
 txt        =  { (!(NEWLINE | bn_open) ~ ANY)+ }
-text       =  { (boneyard | note | txt) }
+text       =  _{ (boneyard | note | txt)+ }
 emphasis   =  { "*"+ }
 
 section_header = @{ "#"+ ~ ws* ~ text }
@@ -55,11 +55,9 @@ header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E")
 // Boneyards & Notes
 
 boneyard     =  { "/*" ~ boneyard_txt ~ "*/" }
-boneyard_txt = @{ (boneyard | !"*/" ~ ANY)* }
-note_txt     = @{ (note | !"]]" ~ ANY)* }
+boneyard_txt =  { (boneyard | !"*/" ~ ANY)* }
+note_txt     =  { (note | !"]]" ~ ANY)* }
 note         =  { "[[" ~ note_txt ~ "]]" }
-
-COMMENT = !{ (boneyard | note) }
 
 // Actions
 
