@@ -1,0 +1,40 @@
+Page break tests
+----------------
+Page one.
+
+===
+
+Page two.
+
+=========
+
+Page three.
+
+----------------
+(file
+  (body_content
+    (action
+      (generic_action
+        (txt: "Page one.")
+      )
+    )
+    (blank_line: "\n")
+    (page_break: "===")
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (txt: "Page two.")
+      )
+    )
+    (blank_line: "\n")
+    (page_break: "=========")
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (txt: "Page three.")
+      )
+    )
+    (blank_line: "\n")
+  )
+)
+
