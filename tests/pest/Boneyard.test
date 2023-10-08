@@ -1,6 +1,5 @@
 Boneyard test
 =============
-
 A line of action.
 
 /* This is an inline Boneyard. */
@@ -24,15 +23,18 @@ This is an /* internal */ boneyard.
   (body_content
     (action
       (generic_action
-        (text: "A line of action.")
+        (txt: "A line of action.")
       )
     )
     (blank_line: "\n")
-    (boneyard
-      (text: " This is an inline Boneyard. ")
-    )
-    (boneyard
-      (text: "This is a\nmulti-line\nBoneyard.")
+    (blank_line: "\n")
+    (blank_line: "\n")
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (txt: "This is an ")
+        (txt: " boneyard.")
+      )
     )
     (blank_line: "\n")
   )

@@ -56,8 +56,8 @@ header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E")
 
 // Boneyards & Notes
 
-boneyard     =  { "/*" ~ boneyard_txt ~ "*/" }
-boneyard_txt =  { (boneyard | !"*/" ~ ANY)* }
+boneyard     =  _{ "/*" ~ boneyard_txt ~ "*/" }
+boneyard_txt =  _{ (boneyard | !"*/" ~ ANY)* }
 note_txt     =  { (note | !"]]" ~ ANY)* }
 note         =  { "[[" ~ note_txt ~ "]]" }
 
