@@ -99,7 +99,7 @@ CUT TO:
       )
     )
     (blank_line: "\n")
-    (page_break: "\n====")
+    (page_break: "====")
     (blank_line: "\n")
     (scene_heading
       (header_flag: "ext. ")
@@ -118,23 +118,16 @@ CUT TO:
     (blank_line: "\n")
     (centered_action: "> THE END <")
     (blank_line: "\n")
+    (note
+      (note_txt: "Comment")
+    )
     (blank_line: "\n")
-    (COMMENT: "[[Comment]]")
-    (blank_line: "\n")
-    (action
-      (generic_action
-        (txt: "= Synopsis")
-      )
+    (synopsis
+      (txt: "= Synopsis")
     )
     (blank_line: "\n")
     (blank_line: "\n")
-    (COMMENT: "/*\nThis txt is in the boneyard.\n*/")
-    (blank_line: "\n")
-    (action
-      (generic_action
-        (txt: "# Section 1")
-      )
-    )
+    (section_header: "# Section 1")
     (blank_line: "\n")
     (action
       (generic_action
@@ -142,11 +135,7 @@ CUT TO:
       )
     )
     (blank_line: "\n")
-    (action
-      (generic_action
-        (txt: "## Section 1-1")
-      )
-    )
+    (section_header: "## Section 1-1")
     (blank_line: "\n")
     (action
       (generic_action
@@ -159,13 +148,10 @@ CUT TO:
       (txt: "FORCED SCENE HEADING")
     )
     (blank_line: "\n")
-    (scene_heading
-      (force_scene: ".")
-      (txt: ".. Not a forced scene heading")
+    (generic_action
+      (txt: "... Not a forced scene heading")
     )
     (blank_line: "\n")
-    (blank_line: "\n")
-    (COMMENT: "/* Boneyard 2 */")
     (blank_line: "\n")
     (action
       (generic_action
@@ -173,11 +159,12 @@ CUT TO:
       )
     )
     (blank_line: "\n")
+    (note
+      (note_txt: "The following should not be considered a transition because it ends with one or more spaces.")
+    )
     (blank_line: "\n")
-    (note: "[[The following should not be considered a transition because it ends with one or more spaces.]]")
-    (blank_line: "\n")
-    (transition
-      (to_transition: "CUT TO:")
+    (action
+      (generic_action: "CUT TO:")
     )
     (blank_line: "\n")
   )
