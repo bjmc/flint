@@ -14,7 +14,7 @@ No.
         (character_name: "ADAM")
       )
       (speech
-        (text: "Yes.")
+        (txt: "Yes.")
       )
     )
     (blank_line: "\n")
@@ -24,7 +24,7 @@ No.
         (dual_marker: "^")
       )
       (speech
-        (text: "No.")
+        (txt: "No.")
       )
     )
     (blank_line: "\n")

@@ -30,7 +30,7 @@ Another scene.
 = Synopsis
 
 /*
-This text is in the boneyard.
+This txt is in the boneyard.
 */
 
 # Section 1
@@ -77,12 +77,12 @@ CUT TO:
     (blank_line: "\n")
     (scene_heading
       (header_flag: "INT. ")
-      (text: "OFFICE - MORNING")
+      (txt: "OFFICE - MORNING")
     )
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "A MAN sits alone at his desk.")
+        (txt: "A MAN sits alone at his desk.")
       )
     )
     (blank_line: "\n")
@@ -95,7 +95,7 @@ CUT TO:
         (parenthetical: "(passionately)")
       )
       (speech
-        (text: "I\'m writing.")
+        (txt: "I\'m writing.")
       )
     )
     (blank_line: "\n")
@@ -103,12 +103,12 @@ CUT TO:
     (blank_line: "\n")
     (scene_heading
       (header_flag: "ext. ")
-      (text: "house - day")
+      (txt: "house - day")
     )
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "Another scene.")
+        (txt: "Another scene.")
       )
     )
     (blank_line: "\n")
@@ -116,54 +116,52 @@ CUT TO:
       (forced_transition: "> Burn to White.")
     )
     (blank_line: "\n")
-    (transition
-      (forced_transition: "> THE END <")
-    )
+    (centered_action: "> THE END <")
     (blank_line: "\n")
     (blank_line: "\n")
     (COMMENT: "[[Comment]]")
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "= Synopsis")
+        (txt: "= Synopsis")
       )
     )
     (blank_line: "\n")
     (blank_line: "\n")
-    (COMMENT: "/*\nThis text is in the boneyard.\n*/")
+    (COMMENT: "/*\nThis txt is in the boneyard.\n*/")
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "# Section 1")
-      )
-    )
-    (blank_line: "\n")
-    (action
-      (generic_action
-        (text: "This is in section one.")
+        (txt: "# Section 1")
       )
     )
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "## Section 1-1")
+        (txt: "This is in section one.")
       )
     )
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "This should be at a higher depth than the previous section.")
+        (txt: "## Section 1-1")
+      )
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (txt: "This should be at a higher depth than the previous section.")
       )
     )
     (blank_line: "\n")
     (scene_heading
       (force_scene: ".")
-      (text: "FORCED SCENE HEADING")
+      (txt: "FORCED SCENE HEADING")
     )
     (blank_line: "\n")
     (scene_heading
       (force_scene: ".")
-      (text: ".. Not a forced scene heading")
+      (txt: ".. Not a forced scene heading")
     )
     (blank_line: "\n")
     (blank_line: "\n")
@@ -171,7 +169,7 @@ CUT TO:
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "Scott exasperatedly throws down the card on the table and picks up the phone, hitting speed dial #1...")
+        (txt: "Scott exasperatedly throws down the card on the table and picks up the phone, hitting speed dial #1...")
       )
     )
     (blank_line: "\n")

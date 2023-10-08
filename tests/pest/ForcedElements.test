@@ -24,18 +24,18 @@ SINGER
         (character_name: "BANG")
       )
       (speech
-        (text: "BANG")
+        (txt: "BANG")
       )
     )
     (blank_line: "\n")
     (dialogue
       (character
         (character_name
-          (text: "McDUCK")
+          (txt: "McDUCK")
         )
       )
       (speech
-        (text: "I\'m vegan.")
+        (txt: "I\'m vegan.")
       )
     )
     (blank_line: "\n")
