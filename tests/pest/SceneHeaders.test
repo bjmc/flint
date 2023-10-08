@@ -64,15 +64,23 @@ int. house - day
         (txt: "... not a scene header.")
       )
     )
-    (scene_heading: "\nINT. HOUSE - DAY")
+    (action
+      (generic_action
+        (txt: "\nINT. HOUSE - DAY")
+      )
+    )
     (action
       (generic_action
         (txt: "EXT. HOUSE - DAY")
       )
     )
-    (scene_heading: "\nESTABLISHING")
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (txt: "ESTABLISHING")
+      )
+    )
     (scene_heading: "\nint. house - day")
     (blank_line: "\n")
   )
 )
-
