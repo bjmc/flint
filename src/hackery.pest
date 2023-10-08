@@ -5,7 +5,7 @@ file = {
 }
 
 title_page   = { start ~ (multiline_pair | pair ~ NEWLINE)+ }
-body_content = { (line_element | multiline_element | blank_line)+ }
+body_content = { (dialogue | line_element | blank_line)+ }
 
 line_element      = _{
     start ~ (
@@ -20,7 +20,7 @@ line_element      = _{
         action
     ) ~ &NEWLINE
 }
-multiline_element =  { dialogue }
+//multiline_element =  { dialogue }
 
 // Title page
 char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")" | "," | ".") }

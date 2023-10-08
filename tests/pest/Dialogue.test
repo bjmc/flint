@@ -59,7 +59,7 @@ reason.
         (character_name: "ADAM")
       )
       (speech
-        (text: "I like to write.")
+        (txt: "I like to write.")
       )
     )
     (blank_line: "\n")
@@ -69,7 +69,7 @@ reason.
         (parenthetical: "(O.S.)")
       )
       (speech
-        (text: "What kind of writing?")
+        (txt: "What kind of writing?")
       )
     )
     (blank_line: "\n")
@@ -81,7 +81,7 @@ reason.
         (parenthetical: "(nervous)")
       )
       (speech
-        (text: "Screenwriting.")
+        (txt: "Screenwriting.")
       )
     )
     (blank_line: "\n")
@@ -90,7 +90,7 @@ reason.
         (character_name: "EVE")
       )
       (speech
-        (text: "ME TOO!")
+        (txt: "ME TOO!")
       )
     )
     (blank_line: "\n")
@@ -100,7 +100,7 @@ reason.
         (parenthetical: "(cont\'d)")
       )
       (speech
-        (text: "I think screenwriting is the best.")
+        (txt: "I think screenwriting is the best.")
       )
     )
     (blank_line: "\n")
@@ -109,13 +109,13 @@ reason.
         (character_name: "ADAM")
       )
       (speech
-        (text: "That\'s great.")
+        (txt: "That\'s great.")
       )
       (speech
-        (text: "I was really worried you wouldn\'t")
+        (txt: "I was really worried you wouldn\'t")
       )
       (speech
-        (text: "like screenwriting.")
+        (txt: "like screenwriting.")
       )
     )
     (blank_line: "\n")
@@ -124,7 +124,7 @@ reason.
         (character_name: "EVE")
       )
       (speech
-        (text: "Oh, Adam.")
+        (txt: "Oh, Adam.")
       )
       (speech
         (parenthetical: "(kissing him)")
@@ -136,7 +136,7 @@ reason.
         (character_name: "ADAM")
       )
       (speech
-        (text: "I love you.")
+        (txt: "I love you.")
       )
     )
     (blank_line: "\n")
@@ -146,7 +146,7 @@ reason.
         (dual_marker: "^")
       )
       (speech
-        (text: "You\'re so stupid.")
+        (txt: "You\'re so stupid.")
       )
     )
     (blank_line: "\n")
@@ -155,7 +155,7 @@ reason.
         (character_name: "R2D2")
       )
       (speech
-        (text: "Bleep Boop.")
+        (txt: "Bleep Boop.")
 			)
       (speech
         (parenthetical: "(*This is a valid character cue.*)")
@@ -164,12 +164,12 @@ reason.
     (blank_line: "\n")
     (action
       (generic_action
-        (text: "23 (O.S.)")
+        (txt: "23 (O.S.)")
       )
     )
     (action
       (generic_action
-        (text: "Character name must include a letter")
+        (txt: "Character name must include a letter")
       )
     )
     (blank_line: "\n")
@@ -178,23 +178,23 @@ reason.
         (character_name: "ADAM")
       )
       (speech
-        (text: "That was really weird.")
+        (txt: "That was really weird.")
       )
       (speech
-        (text: "I can be weird too. Here\'s")
+        (txt: "I can be weird too. Here\'s")
       )
       (speech
-        (text: "a space in the dialogue")
+        (txt: "a space in the dialogue")
       )
       (speech
-        (text: "block")
+        (txt: "block")
       )
       (continuation_line: "\n  ")
       (speech
-        (text: "for absolutely no good")
+        (txt: "for absolutely no good")
       )
       (speech
-        (text: "reason.")
+        (txt: "reason.")
       )
     )
     (blank_line: "\n")
@@ -206,7 +206,7 @@ reason.
         (parenthetical: "(feeling cocky)")
       )
       (speech
-        (text: "Well, then I\'ll just indent!")
+        (txt: "Well, then I\'ll just indent!")
       )
     )
     (blank_line: "\n")
