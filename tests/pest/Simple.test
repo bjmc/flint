@@ -164,7 +164,7 @@ CUT TO:
     )
     (blank_line: "\n")
     (action
-      (generic_action: "CUT TO:")
+      (generic_action: "CUT TO:   ")
     )
     (blank_line: "\n")
   )

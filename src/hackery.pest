@@ -48,11 +48,10 @@ section_header = @{ "#"+ ~ ws* ~ text }
 page_break = { "="{3, } }
 
 // Scene headers
-
-scene_heading = { (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? }
-force_scene   = { "." }
+scene_heading = @{ NEWLINE ~ (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? }
+force_scene   = { "." ~ !"." }
 scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
-header_flag   = { (^"INT" | ^"EXT" | ^"EST" | ^"INT./EXT" | ^"INT/EXT" | ^"I/E") ~ (" " | ".")+ }
+header_flag   = { ((^"INT" ~ "."? ~ ^"/EXT"?) | ^"EXT" | ^"EST" | ^"I" ~ "."? ~ ^"/E") ~ "."? }
 
 // Boneyards & Notes
 
