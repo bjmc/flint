@@ -11,4 +11,31 @@ This is an [[internal]] note.
 
 ===========
 
-(file)
+(file
+  (body_content
+    (action
+      (generic_action
+        (txt: "A line.")
+      )
+    )
+    (blank_line: "\n")
+    (note
+      (note_txt: "A note.")
+    )
+    (blank_line: "\n")
+    (note
+      (note_txt: "This note spans\n  multiple lines.")
+    )
+    (blank_line: "\n")
+    (action
+      (generic_action
+        (txt: "This is an ")
+        (note
+          (note_txt: "internal")
+        )
+        (txt: " note.")
+      )
+    )
+    (blank_line: "\n")
+  )
+)

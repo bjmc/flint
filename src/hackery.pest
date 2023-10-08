@@ -10,6 +10,8 @@ body_content = { (line_element | multiline_element | blank_line)+ }
 line_element      = _{
     start ~ (
         page_break |
+        note |
+        boneyard |
         section_header |
         scene_heading |
         centered_action |
