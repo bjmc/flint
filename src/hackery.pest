@@ -37,6 +37,7 @@ block_value    =  {
 // Basics
 ws         = _{ (" " | "\t") }
 start      = _{ SOI | NEWLINE }
+end        = _{ EOI  | NEWLINE }
 bn_open    =  { ("[[" | "/*") }
 blank_line =  { NEWLINE }
 txt        =  { (!(NEWLINE | bn_open) ~ ANY)+ }
@@ -48,10 +49,11 @@ section_header = @{ "#"+ ~ ws* ~ text }
 page_break = { "="{3, } }
 
 // Scene headers
-scene_heading = @{ NEWLINE ~ (force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number? ~ &NEWLINE }
-force_scene   = { "." ~ !"." }
-scene_number  = { "#" ~ (ASCII_DIGIT | "." | "-")+ ~ "#" }
-header_flag   = { ((^"INT" ~ "."? ~ ^"/EXT"?) | ^"EXT" | ^"EST" | ^"I" ~ "."? ~ ^"/E") ~ "."? ~ " " }
+scene_heading     = _{ NEWLINE ~ scene_heading_txt ~ &(NEWLINE ~ end) }
+scene_heading_txt = @{ ((force_scene | header_flag) ~ (!"#" ~ text) ~ scene_number?) }
+force_scene       =  { "." ~ !"." }
+scene_number      =  { "#" ~ (ASCII_ALPHANUMERIC | "." | "-")+ ~ "#" }
+header_flag       =  { ((^"INT" ~ "."? ~ ^"/EXT"?) | ^"EXT" | ^"EST" | ^"I" ~ "."? ~ ^"/E") ~ "."? ~ " " }
 
 // Boneyards & Notes
 
