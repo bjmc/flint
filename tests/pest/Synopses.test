@@ -1,0 +1,37 @@
+Synopses Tests
+--------------
+# Act One
+
+= This is the first act.
+
+# Act Two
+
+=This is another act.
+
+# Act Three
+
+=THE FINAL ACT
+
+--------------
+(file
+  (body_content
+    (section_header: "# Act One")
+    (blank_line: "\n")
+    (synopsis
+      (txt: "This is the first act.")
+    )
+    (blank_line: "\n")
+    (section_header: "# Act Two")
+    (blank_line: "\n")
+    (synopsis
+      (txt: "This is another act.")
+    )
+    (blank_line: "\n")
+    (section_header: "# Act Three")
+    (blank_line: "\n")
+    (synopsis
+      (txt: "THE FINAL ACT")
+    )
+    (blank_line: "\n")
+  )
+)
