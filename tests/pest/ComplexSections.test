@@ -1,0 +1,27 @@
+More section tests
+------------------
+# Act 1
+= Synopsis 1
+
+INT. LOCATION - DAY
+
+# Act 2
+## Sequence 1
+
+INT. LOCATION - DAY
+
+------------------
+(file
+  (body_content
+    (section_header: "# Act 1")
+    (synopsis
+      (txt: "Synopsis 1")
+    )
+    (scene_heading_txt: "INT. LOCATION - DAY")
+    (blank_line: "\n")
+    (section_header: "# Act 2")
+    (section_header: "## Sequence 1")
+    (scene_heading_txt: "INT. LOCATION - DAY")
+    (blank_line: "\n")
+  )
+)
