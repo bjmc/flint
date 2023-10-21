@@ -5,9 +5,9 @@ file = {
 }
 
 title_page   = { start ~ (multiline_pair | pair ~ NEWLINE)+ }
-body_content = { (dialogue | line_element | blank_line)+ }
+body_content = { ( dialogue | line_element | blank_line)+ }
 
-line_element      = _{
+line_element = _{
     start ~ (
         page_break |
         synopsis |
@@ -16,12 +16,10 @@ line_element      = _{
         section_header |
         scene_heading |
         centered_action |
-        scene_heading |
         transition |
         action
     ) ~ &NEWLINE
 }
-//multiline_element =  { dialogue }
 
 // Title page
 char           =  { (ASCII_ALPHANUMERIC | " " | "-" | "(" | ")" | "," | ".") }
@@ -43,7 +41,6 @@ bn_open    =  { ("[[" | "/*") }
 blank_line =  { NEWLINE }
 txt        =  { (!(NEWLINE | bn_open) ~ ANY)+ }
 text       =  _{ (boneyard | note | txt)+ }
-emphasis   =  { "*"+ }
 
 section_header = @{ "#"+ ~ ws* ~ text }
 
@@ -84,7 +81,7 @@ parenthetical     =  { "(" ~ (!")" ~ ANY)+ ~ ")" }
 character         =  { ws* ~ character_name ~ ws* ~ (parenthetical | dual_marker)* ~ &NEWLINE }
 
 // Transitions
-transition           =  { emphasis? ~ (forced_transition | magic_transition | to_transition) ~ emphasis? ~ ws* }
+transition           =  { (forced_transition | magic_transition | to_transition) ~ !ws }
 forced_transition    = @{ ">" ~ transition_txt+ }
 to_transition        = @{ leading* ~ "TO:" }
 terminal_punctuation =  { ("." | ":") }
