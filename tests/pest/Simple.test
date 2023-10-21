@@ -74,11 +74,7 @@ CUT TO:
     (transition
       (magic_transition: "FADE IN:")
     )
-    (blank_line: "\n")
-    (scene_heading
-      (header_flag: "INT. ")
-      (txt: "OFFICE - MORNING")
-    )
+    (scene_heading_txt: "INT. OFFICE - MORNING")
     (blank_line: "\n")
     (action
       (generic_action
@@ -100,11 +96,7 @@ CUT TO:
     )
     (blank_line: "\n")
     (page_break: "====")
-    (blank_line: "\n")
-    (scene_heading
-      (header_flag: "ext. ")
-      (txt: "house - day")
-    )
+    (scene_heading_txt: "ext. house - day")
     (blank_line: "\n")
     (action
       (generic_action
@@ -123,7 +115,7 @@ CUT TO:
     )
     (blank_line: "\n")
     (synopsis
-      (txt: "= Synopsis")
+      (txt: "Synopsis")
     )
     (blank_line: "\n")
     (blank_line: "\n")
@@ -142,14 +134,12 @@ CUT TO:
         (txt: "This should be at a higher depth than the previous section.")
       )
     )
+    (scene_heading_txt: ".FORCED SCENE HEADING")
     (blank_line: "\n")
-    (scene_heading
-      (force_scene: ".")
-      (txt: "FORCED SCENE HEADING")
-    )
-    (blank_line: "\n")
-    (generic_action
-      (txt: "... Not a forced scene heading")
+    (action
+      (generic_action
+        (txt: "... Not a forced scene heading")
+      )
     )
     (blank_line: "\n")
     (blank_line: "\n")
@@ -164,7 +154,9 @@ CUT TO:
     )
     (blank_line: "\n")
     (action
-      (generic_action: "CUT TO:   ")
+      (generic_action 
+        (txt: "CUT TO: ")
+      )
     )
     (blank_line: "\n")
   )

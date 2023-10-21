@@ -6,7 +6,7 @@ SMASH CUT TO:
 
 FADE TO BLACK.
 
-> NOT A STANDARD TRANSITION:
+> THE FOLLOWING IS NOT A STANDARD TRANSITION:
 
 CUT TO:  
 
@@ -30,11 +30,13 @@ TO:
     )
     (blank_line: "\n")
     (transition
-      (forced_transition: "> NOT A STANDARD TRANSITION:")
+      (forced_transition: "> THE FOLLOWING IS NOT A STANDARD TRANSITION:")
     )
     (blank_line: "\n")
-    (transition
-      (to_transition: "CUT TO:")
+    (action
+      (generic_action 
+        (txt: "CUT TO:  ")
+      )
     )
     (blank_line: "\n")
     (transition
