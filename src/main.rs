@@ -7,17 +7,16 @@ use pest::Parser;
 
 mod example {
     #[derive(pest_derive::Parser)]
-    #[grammar = "hackery.pest"]
+    #[grammar = "fountain.pest"]
     pub struct OurParser;
 }
 
 //#[derive(Parser)]
 //#[grammar = "hackery.pest"]
 //pub struct OurParser;
-
 // Generate tests for all test cases in tests/pest/foo/ and all subdirectories. Since
 // `lazy_static = true`, a single `PestTester` is created and used by all tests; otherwise a new
-// `PestTester` would be created for each test.
+// `PestTester` would be created for each test. 
 use pest_test_gen::pest_tests;
 #[pest_tests(
   super::example::OurParser,
@@ -29,7 +28,7 @@ use pest_test_gen::pest_tests;
   lazy_static = true,
 )]
 #[cfg(test)]
-mod foo_tests {}
+mod tests {}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
