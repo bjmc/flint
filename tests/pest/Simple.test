@@ -70,10 +70,7 @@ CUT TO:
     )
   )
   (body_content
-    (blank_line: "\n")
-    (transition
-      (magic_transition: "FADE IN:")
-    )
+    (transition_txt: "FADE IN:")
     (scene_heading_txt: "INT. OFFICE - MORNING")
     (blank_line: "\n")
     (action
@@ -103,12 +100,8 @@ CUT TO:
         (txt: "Another scene.")
       )
     )
-    (blank_line: "\n")
-    (transition
-      (forced_transition: "> Burn to White.")
-    )
-    (blank_line: "\n")
-    (centered_action: "> THE END <")
+    (transition_txt: "> Burn to White.")
+    (transition_txt: "> THE END <")
     (blank_line: "\n")
     (note
       (note_txt: "Comment")
@@ -154,7 +147,7 @@ CUT TO:
     )
     (blank_line: "\n")
     (action
-      (generic_action 
+      (generic_action
         (txt: "CUT TO: ")
       )
     )

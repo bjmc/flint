@@ -17,35 +17,18 @@ TO:
 =================
 (file
   (body_content
-    (transition
-      (to_transition: "CUT TO:")
-    )
-    (blank_line: "\n")
-    (transition
-      (to_transition: "SMASH CUT TO:")
-    )
-    (blank_line: "\n")
-    (transition
-      (magic_transition: "FADE TO BLACK.")
-    )
-    (blank_line: "\n")
-    (transition
-      (forced_transition: "> THE FOLLOWING IS NOT A STANDARD TRANSITION:")
-    )
+    (transition_txt: "CUT TO:")
+    (transition_txt: "SMASH CUT TO:")
+    (transition_txt: "FADE TO BLACK.")
+    (transition_txt: "> THE FOLLOWING IS NOT A STANDARD TRANSITION:")
     (blank_line: "\n")
     (action
-      (generic_action 
+      (generic_action
         (txt: "CUT TO:  ")
       )
     )
-    (blank_line: "\n")
-    (transition
-      (to_transition: "GO TO:")
-    )
-    (blank_line: "\n")
-    (transition
-      (to_transition: "TO:")
-    )
+    (transition_txt: "GO TO:")
+    (transition_txt: "TO:")
     (blank_line: "\n")
   )
 )

@@ -18,14 +18,8 @@ They speed off.  To destiny!
 -----------------
 (file
   (body_content
-    (transition
-      (to_transition: "                CUT TO:")
-    )
-    (blank_line: "\n")
-    (scene_heading
-      (header_flag: "INT. ")
-      (txt: "GARAGE - DAY")
-    )
+    (transition_txt: "CUT TO:")
+    (scene_heading_txt: "INT. GARAGE - DAY")
     (blank_line: "\n")
     (action
       (generic_action
